@@ -16,7 +16,12 @@ class EntitiesTableSeeder extends Seeder
         factory(Entity::class, 10)->create()->each(function ($entity) {
             // Randomly decide whether to create a parent or not
             $toss = rand(0, 1);
-            $toss ? $entity->children()->createMany(factory(Entity::class, rand(1, 10))->make()->toArray()) : '';
+            $toss ? $entity->children()->createMany(
+                factory(Entity::class, rand(1, 10))->make()->toArray()
+            )->each(function ($child) { // Seed second level
+                $toss = rand(0, 1);
+                $toss ? $child->children()->createMany(factory(Entity::class, rand(1, 10))->make()->toArray()) : '';
+            }) : '';
         });
     }
 }
