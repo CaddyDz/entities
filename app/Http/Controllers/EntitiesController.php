@@ -15,7 +15,7 @@ class EntitiesController extends Controller
     public function index()
     {
         // Get only parent components
-        return Entity::where('parent_id', null)->latest()->get();
+        return Entity::where('parent_id', null)->latest()->get(['name', 'barcode', 'description']);
     }
 
     /**
