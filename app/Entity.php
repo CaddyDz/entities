@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entity extends Model
 {
     protected $fillable = [
-        'name', 'barcode', 'description'
+        'name', 'barcode', 'description', 'parent_id'
     ];
 
     /**
