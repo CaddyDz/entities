@@ -15,7 +15,10 @@ class EntitiesController extends Controller
     public function index()
     {
         // Get only parent components
-        return Entity::where('parent_id', null)->latest()->get(['name', 'barcode', 'description']);
+        return Entity::withCount('children')
+            ->where('parent_id', null)
+            // id is necessary for eager loading
+            ->latest()->get(['id', 'name', 'barcode', 'description']);
     }
 
     /**
@@ -31,5 +34,16 @@ class EntitiesController extends Controller
             'status' => 'success',
             'entity' => $entity
         ], 201);
+    }
+
+    /**
+     * Display a listing of the entities.
+     *
+     * @param App\Entity $entity
+     * @return \Illuminate\Http\Response
+     */
+    public function getChildren(Entity $entity)
+    {
+        return $entity->children()->withCount('children')->get();
     }
 }
