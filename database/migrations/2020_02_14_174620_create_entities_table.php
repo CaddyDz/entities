@@ -15,6 +15,11 @@ class CreateEntitiesTable extends Migration
     {
         Schema::create('entities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('entities')->onDelete('cascade');
+            $table->string('name');
+            $table->unsignedBigInteger('barcode')->unique();
+            $table->text('description');
             $table->timestamps();
         });
     }
