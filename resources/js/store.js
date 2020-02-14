@@ -7,6 +7,9 @@ export const store = new Vuex.Store({
         entities: []
     },
     mutations: {
+        initEntities(state, entities) {
+            state.entities = entities;
+        },
         addEntity(state, entity) {
             state.entities.unshift(entity); // Push to front
         }
