@@ -14,7 +14,7 @@ export default {
 				this.$store.commit("initEntities", response.data);
 			})
 			.catch(error => {
-				this.errors = error.response.data.errors;
+				console.log(error.response.data.errors);
 			});
 	}
 };
