@@ -30,6 +30,7 @@ class EntitiesController extends Controller
     public function store(StoreEntityRequest $request)
     {
         $entity = Entity::create($request->all());
+        $entity->{"children_count"} = 0;
         return response([
             'status' => 'success',
             'entity' => $entity
