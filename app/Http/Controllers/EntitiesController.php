@@ -46,4 +46,9 @@ class EntitiesController extends Controller
     {
         return $entity->children()->withCount('children')->get();
     }
+
+    public function getLastBarCode()
+    {
+        return Entity::max('barcode') + 1;
+    }
 }
