@@ -82,6 +82,7 @@ export default {
 					this.declareAddition(response.data.entity.parent_id);
 					this.$store.commit("addEntity", response.data.entity);
 					this.$refs.form.reset(); // Clear form
+					this.getDefaultBarCode();
 				})
 				.catch(err => {
 					this.errors = err.response.data.errors;
