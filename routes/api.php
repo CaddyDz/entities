@@ -15,3 +15,4 @@ Route::get('/entities', 'EntitiesController@index');
 Route::post('/entities', 'EntitiesController@store');
 Route::get('/entities/{entity}/children', 'EntitiesController@getChildren')
 	->where('entity', '[0-9]+');
+Route::get('/getLastBarcode', 'EntitiesController@getLastBarCode');
