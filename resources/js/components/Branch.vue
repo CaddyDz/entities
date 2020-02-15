@@ -25,7 +25,16 @@ export default {
 	},
 	computed: {
 		isParent() {
-			return this.entity.children_count;
+			return this.entity.children_count != 0;
+		}
+	},
+	watch: {
+		isOpen(value) {
+			if (value) {
+				this.$store.commit("addOpenBranch", this.entity.id);
+			} else {
+				this.$store.commit("removeOpenBranch", this.entity.id);
+			}
 		}
 	},
 	methods: {
@@ -48,6 +57,11 @@ export default {
 					this.errors = error.response.data.errors;
 				});
 		}
+	},
+	mounted() {
+		this.$root.$on("addedChild", id => {
+			this.getChildren(id);
+		});
 	}
 };
 </script>

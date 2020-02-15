@@ -32,7 +32,7 @@
 					id="barcode"
 					aria-describedby="barcodeHelp"
 					name="barcode"
-					value
+					:value="barcode"
 				/>
 				<small id="barcodeHelp" class="form-text text-muted">You can manually type in barcode</small>
 			</div>
@@ -51,7 +51,8 @@ export default {
 	data() {
 		return {
 			isFormShown: false,
-			errors: []
+			errors: [],
+			barcode: 0
 		};
 	},
 	computed: {
@@ -68,6 +69,7 @@ export default {
 	methods: {
 		toggleForm() {
 			this.isFormShown = !this.isFormShown;
+			this.getDefaultBarCode();
 		},
 		createEntity() {
 			const formEntries = new FormData(this.$refs.form).entries();
@@ -77,12 +79,24 @@ export default {
 			axios
 				.post("/api/entities", data)
 				.then(response => {
+					this.declareAddition(response.data.entity.parent_id);
 					this.$store.commit("addEntity", response.data.entity);
 					this.$refs.form.reset(); // Clear form
 				})
-				.catch(error => {
-					this.errors = error.response.data.errors;
+				.catch(err => {
+					this.errors = err.response.data.errors;
 				});
+		},
+		declareAddition(id) {
+			// if has an open parent, emit event to refresh children
+			if (id && this.$store.getters.isOpen(id)) {
+				this.$root.$emit("addedChild", id);
+			}
+		},
+		getDefaultBarCode() {
+			axios.get("/api/getLastBarcode").then(response => {
+				this.barcode = response.data;
+			});
 		}
 	}
 };
