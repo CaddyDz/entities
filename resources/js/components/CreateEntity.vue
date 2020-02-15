@@ -40,7 +40,7 @@
 				<label for="description">* Description:</label>
 				<textarea class="form-control" id="description" rows="3" name="description" required></textarea>
 			</div>
-			<button type="button" class="btn btn-primary" @click="createEntity">Create</button>
+			<button type="button" class="btn btn-success" @click="createEntity">Create</button>
 			<hr />
 		</form>
 	</div>
