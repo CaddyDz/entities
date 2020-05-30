@@ -16,11 +16,10 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(Entity::class, function (Faker $faker) {
-    return [
-        'name' => $faker->word,
-        // https://github.com/fzaninotto/Faker#fakerproviderbarcode
-        'barcode' => $faker->ean13,
-        'description' => $faker->realText(),
-    ];
-});
+$factory->define(Entity::class, fn (Faker $faker) =>
+[
+    'name' => $faker->word,
+    // https://github.com/fzaninotto/Faker#fakerproviderbarcode
+    'barcode' => $faker->ean13,
+    'description' => $faker->realText(),
+]);
