@@ -4,9 +4,6 @@ $finder = PhpCsFixer\Finder::create()
 	->exclude('/vendor')
 	->exclude('/nova')
 	->exclude('/node_modules')
-	->exclude('/bootstrap')
-	->exclude('_ide_helper.php')
-	->exclude('/storage')
 	->in(__DIR__);
 
 return PhpCsFixer\Config::create()
