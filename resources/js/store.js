@@ -26,6 +26,9 @@ export const store = new Vuex.Store({
             if (entity.parent_id == null) {
                 state.entities.unshift(entity); // Push to front
             }
+        },
+        deleteEntity(state, id) {
+            state.entities.filter(entitiy => entitiy.id !== id);
         }
     }
 })

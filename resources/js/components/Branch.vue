@@ -1,10 +1,16 @@
 <template>
 	<li>
 		<div :class="{bold: isParent}" @click="toggle(entity.id)">
-			{{ entity.name }} - {{ entity.barcode }}
-			<span v-if="isParent">[{{ isOpen ? '-' : '+' }}]</span>
-			<br />
-			<p>{{ entity.description }}</p>
+			<div class="header" >
+				<span>
+					{{ entity.name }} - {{ entity.barcode }}
+					<span v-if="isParent">[{{ isOpen ? '-' : '+' }}]</span>
+				</span>
+				<button class="btn btn-danger" @click="deleteEntity(entity.id)" >Delete</button>
+			</div>
+			<div class="content" >	
+				<p>{{ entity.description }}</p>
+			</div>
 		</div>
 		<ul v-show="isOpen" v-if="isParent">
 			<branch class="entity" v-for="(child, index) in children" :key="index" :entity="child"></branch>
@@ -56,6 +62,15 @@ export default {
 				.catch(error => {
 					this.errors = error.response.data.errors;
 				});
+		},
+		deleteEntity(id){
+			axios.delete(`/api/entities/${id}`)
+			.then(res => {
+				this.$store.commit("deleteEntity", id);
+			})
+			.catch(err => {
+				this.errors = err.response.data.errors;
+			});
 		}
 	},
 	mounted() {
@@ -67,6 +82,10 @@ export default {
 </script>
 
 <style scoped>
+.header{
+	display: flex;
+	justify-content: space-between;
+}
 li {
 	display: block;
 }

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Tests\Unit;
 
 use Tests\TestCase;
@@ -9,14 +7,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DeleteEntityTest extends TestCase
 {
-	use RefreshDatabase;
+	use DatabaseMigrations;
 
 	/**
 	 * Test entities can be deleted
 	 *
 	 * @return void
 	 */
-	public function testEntitiesCanBeDeleted()
+	public function testEntitiesCanBeDeleted(): void
 	{
 		$entity = [
 			'name' => 'entity1',

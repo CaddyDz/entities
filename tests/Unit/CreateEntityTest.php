@@ -25,7 +25,7 @@ class CreateEntityTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function testEntitiesCanBeCreated()
+	public function testEntitiesCanBeCreated(): void
 	{
 		$response = $this->json('POST', '/api/entities', $this->entity);
 		$response
@@ -40,7 +40,7 @@ class CreateEntityTest extends TestCase
 	 *
 	 * @return void
 	 */
-	public function testIncrementingBarcode()
+	public function testIncrementingBarcode(): void
 	{
 		$entity = [
 			'name' => 'Caddy',
