@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Entity;
-use App\Http\Requests\StoreEntityRequest;
-use App\Http\Requests\DeleteEntityRequest;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreEntityRequest;
 
 class EntitiesController extends Controller
 {
@@ -33,9 +32,8 @@ class EntitiesController extends Controller
 	 */
 	public function store(StoreEntityRequest $request)
 	{
-		$entity = Entity::create($request->all());
-		$entity->{"children_count"} = 0;
-		return response([
+		$entity = Entity::create($request->all()); $entity->{"children_count"} = 0;
+		return response([ 
 			'status' => 'success',
 			'entity' => $entity
 		], 201);
@@ -45,20 +43,16 @@ class EntitiesController extends Controller
 	 * Remove entity from storage.
 	 *
 	 * @param  \App\Http\Requests\DeleteEntityRequest $request
-	 * @return \Illuminate\Http\Response
+	 * @return \Illuminate\Http\Response 
 	 */
-	public function delete(DeleteEntityRequest $request)
+	public function delete(Request $request)
 	{
 		Entity::destroy($request->id);
-		Entity::where('parent_id', $request->id)->delete();
-		return response([
-			'status' => 'success',
-			'message' => 'entity successfully deleted'
-		], 201);
+		return response(null, 204);
 	}
 
 	/**
-	 * Display a listing of the entities.
+	 * Display a listing of the entities.php
 	 *
 	 * @param App\Entity $entity
 	 * @return \Illuminate\Http\Response

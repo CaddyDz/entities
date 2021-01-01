@@ -26,7 +26,7 @@ class DeleteEntityRequest extends FormRequest
 	public function rules()
 	{
 		return [
-			'id' => 'required',
+			'id' => 'required|integer|exists:entities,id',
 		];
 	}
 }
