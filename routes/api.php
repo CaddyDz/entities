@@ -15,6 +15,7 @@ declare(strict_types=1);
 
 Route::get('/entities', 'EntitiesController@index');
 Route::post('/entities', 'EntitiesController@store');
+Route::delete('/entities/{id}', 'EntitiesController@delete');
 Route::get('/entities/{entity}/children', 'EntitiesController@getChildren')
 	->where('entity', '[0-9]+');
 Route::get('/getLastBarcode', 'EntitiesController@getLastBarCode');

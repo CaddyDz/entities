@@ -6,14 +6,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEntityRequest extends FormRequest
+class DeleteEntityRequest extends FormRequest
 {
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool
 	 */
-	public function authorize(): bool
+	public function authorize() :bool
 	{
 		return true;
 	}
@@ -26,11 +26,7 @@ class StoreEntityRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'name' => 'bail|required|string|max:100',
-			// Make sure the submitted "parent_id" if any, exists in DB
-			'parent_id' => 'nullable|integer|exists:entities,id',
-			'barcode' => 'nullable|digits_between:10,100|unique:entities',
-			'description' => 'bail|required|string|min:3|max:1000'
+			'id' => 'required|integer|exists:entities,id',
 		];
 	}
 }
