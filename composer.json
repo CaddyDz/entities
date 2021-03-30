@@ -16,7 +16,7 @@
 	"require-dev": {
 		"barryvdh/laravel-ide-helper": "^2.8",
 		"facade/ignition": "^1.4",
-		"fakerphp/faker": "^1.13",
+		"fakerphp/faker": "^1.14",
 		"laravel/ui": "^1.2",
 		"mockery/mockery": "^1.0",
 		"nunomaduro/collision": "^3.2",
